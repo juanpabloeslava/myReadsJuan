@@ -1,7 +1,6 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
 // views and components
-
+import OpenSearch from '../2-components/OpenSearch'
 // data
 // import * as BooksAPI from './BooksAPI'
 
@@ -175,9 +174,7 @@ class Home extends React.Component {
                         </div>
                     </div>
                 </div>
-                <div className="open-search">
-                    <button onClick={() => this.setState({ showSearchPage: true })}>Add a book</button>
-                </div>
+                <OpenSearch />
             </div>
         )
     }
