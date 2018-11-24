@@ -37,7 +37,9 @@ class Home extends React.Component {
                 </div>
                 <div className="list-books-content">
                     <div>
-                        <Shelf />
+                        <Shelf shelfTitle="Currently Reading"/>
+                        <Shelf shelfTitle="Want to Read"/>
+                        <Shelf shelfTitle="Read"/>
                     </div>
                 </div>
                 <OpenSearch />
