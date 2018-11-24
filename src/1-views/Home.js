@@ -15,7 +15,7 @@ class Home extends React.Component {
         }
     }
 
-    // load books on comp mount
+    // load our books on comp mount
     componentDidMount() {
         // call the API
         BooksAPI.getAll()

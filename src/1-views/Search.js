@@ -12,8 +12,23 @@ class Search extends React.Component {
 
         this.state = {
             books: [],
+            results: [],
             searchQuery: ""
         }
+    }
+
+    // load our books on comp mount
+    componentDidMount() {
+        // call the API
+        BooksAPI.getAll()
+            .then(resp => {
+                this.setState({
+                    books: resp
+                })
+            })
+            .catch(error => {
+                console.log(error);
+            })
     }
 
     // Method: show results
@@ -27,19 +42,19 @@ class Search extends React.Component {
                 .then(resp => {
                     // if there's an error, keep the state.books empty
                     if (resp.error) {
-                        this.setState({ books: [] });
+                        this.setState({ results: [] });
                     }
                     else {
                         // if there's no error in the response, change the state.books to the
                         //  response
-                        this.setState({ books: resp });
+                        this.setState({ results: resp });
                     }
                 })
                 .catch(error => {
                     console.log(error);
                 })
         } else {
-            this.setState({ books: [] })
+            this.setState({ results: [] })
         }
     }
 
@@ -86,7 +101,7 @@ class Search extends React.Component {
                 <div className="search-books-results">
                     <ol className="books-grid">
                         {
-                            this.state.books.map(book => (
+                            this.state.results.map(book => (
                                 <Book
                                     // pass 3 props for:
                                     // - key(otherwise it throws an error)
