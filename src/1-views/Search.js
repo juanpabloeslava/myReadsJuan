@@ -24,7 +24,7 @@ class Search extends React.Component {
             .then(resp => {
                 this.setState({
                     books: resp
-                })
+                });
             })
             .catch(error => {
                 console.log(error);
@@ -44,9 +44,18 @@ class Search extends React.Component {
                     if (resp.error) {
                         this.setState({ results: [] });
                     }
+                    // if there's no error in the response, change the state.books to the response
                     else {
-                        // if there's no error in the response, change the state.books to the
-                        //  response
+                        // compare between the search results and our books, to figure out shelves
+                        resp.forEach( bookResult => {
+                            // store equal books (between mine and searched)
+                            let matchBook = this.state.books.filter( bookIHave =>
+                                bookIHave.id === bookResult.id
+                            );
+                            // if there's a match, take it's first result book and change the shelf value
+                            // to the same as the one we have in our shelf
+                            bookResult.shelf = matchBook[0] ? matchBook[0].shelf : null;
+                        });
                         this.setState({ results: resp });
                     }
                 })
