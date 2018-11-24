@@ -37,9 +37,27 @@ class Home extends React.Component {
                 </div>
                 <div className="list-books-content">
                     <div>
-                        <Shelf shelfTitle="Currently Reading"/>
-                        <Shelf shelfTitle="Want to Read"/>
-                        <Shelf shelfTitle="Read"/>
+                        <Shelf 
+                            shelfTitle="Currently Reading"
+                            booksInShelf={
+                                this.state.books.filter( book => 
+                                    book.shelf === 'currentlyReading'    
+                                )
+                            } />
+                        <Shelf 
+                            shelfTitle="Want to Read" 
+                            booksInShelf={
+                                this.state.books.filter( book => 
+                                    book.shelf === 'wantToRead'    
+                                )
+                            } />
+                        <Shelf 
+                            shelfTitle="Read" 
+                            booksInShelf={
+                                this.state.books.filter( book => 
+                                    book.shelf === 'read'    
+                                )
+                            } />
                     </div>
                 </div>
                 <OpenSearch />
