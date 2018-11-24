@@ -16,6 +16,7 @@ class Shelf extends React.Component {
                             this.props.booksInShelf.map ( book => (
                                 <Book 
                                     key={book.id} 
+                                    thisBook={book}
                                 />
                             ))
                         }
