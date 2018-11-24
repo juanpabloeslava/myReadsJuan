@@ -42,6 +42,11 @@ class Home extends React.Component {
                 book.shelf = targetShelf;
                 this.setState(state => ({
                     books: state.books
+                        .filter( newBook => 
+                            // just if new book is not the same as old one
+                            newBook.id !== book.id
+                        )
+                        .concat([book])
                 }));
             })
             .catch(error => {
