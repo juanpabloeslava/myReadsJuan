@@ -3,10 +3,20 @@ import React from 'react'
 import OpenSearch from '../2-components/OpenSearch'
 import Shelf from '../2-components/Shelf'
 // data
-// import * as BooksAPI from './BooksAPI'
+import * as BooksAPI from '../BooksAPI'
 
 class Home extends React.Component {
-
+    // load books on comp mount
+    componentDidMount() {
+        // call the API
+        BooksAPI.getAll()
+            .then( resp => {
+                console.log (resp);
+            })
+            .catch( error => {
+                console.log (error);
+            })
+    }
     render() {
 
         return (
