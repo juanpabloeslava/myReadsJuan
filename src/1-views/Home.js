@@ -6,15 +6,26 @@ import Shelf from '../2-components/Shelf'
 import * as BooksAPI from '../BooksAPI'
 
 class Home extends React.Component {
+    // constructor
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            books: []
+        }
+    }
+
     // load books on comp mount
     componentDidMount() {
         // call the API
         BooksAPI.getAll()
-            .then( resp => {
-                console.log (resp);
+            .then(resp => {
+                this.setState({
+                    books: resp
+                })
             })
-            .catch( error => {
-                console.log (error);
+            .catch(error => {
+                console.log(error);
             })
     }
     render() {
@@ -26,7 +37,7 @@ class Home extends React.Component {
                 </div>
                 <div className="list-books-content">
                     <div>
-                        <Shelf />                        
+                        <Shelf />
                     </div>
                 </div>
                 <OpenSearch />
