@@ -1,10 +1,11 @@
 import React from 'react'
 // views and components
 // data
-// import * as BooksAPI from './BooksAPI'
 
 class Book extends React.Component {
 
+    // saveguard Methods:
+    // in case either Author, Title, or Cover info for each book is missing, handle the errors
     bookAuthor = (book) => {
         if (book.authors) {
             const string = (book.authors.length === 1) ? book.authors : `${book.authors[0]} , et al.`;
@@ -13,7 +14,7 @@ class Book extends React.Component {
             return 'Unkown Author(s)'
         }
     }
-    
+
     bookTitle = (book) => {
         return book.title ? book.title : 'Unkown Title';
     }
@@ -25,10 +26,6 @@ class Book extends React.Component {
 
     bookShelf = (book) => {
         return book.shelf ? book.shelf : "none";
-    }
-
-    selectChange = () => {
-        console.log ('This book will change shelves');
     }
 
     render() {
@@ -47,9 +44,13 @@ class Book extends React.Component {
                             }>
                         </div>
                         <div className="book-shelf-changer">
-                            <select 
+                            <select
                                 value={this.bookShelf(this.props.thisBook)}
-                                onChange={this.selectChange}
+                                onChange={event => {
+                                    // call the moveBook func, passing the current book and desired shelf as values
+                                    // the function comes originally from Home and/or Search, passed as prop
+                                    this.props.moveBook(this.props.thisBook, event.target.value)
+                                }}
                             >
                                 <option value="move" disabled>Move to...</option>
                                 <option value="currentlyReading">Currently Reading</option>
