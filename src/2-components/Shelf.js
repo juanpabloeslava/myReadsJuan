@@ -22,7 +22,7 @@ class Shelf extends React.Component {
                                     // pass 3 props for:
                                     // - key(otherwise it throws an error)
                                     // - individual book (it'll then have all books data as an object)
-                                    // - moveBook Method (originally in Home and Search)
+                                    // - moveBook Method throughs props (originally from Home)
                                     key={book.id} 
                                     thisBook={book}
                                     moveBook={this.props.moveBook}

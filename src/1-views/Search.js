@@ -43,6 +43,31 @@ class Search extends React.Component {
         }
     }
 
+    // Manage books Method:
+    // move books between shelves (and from search page to shelves)
+    // passed down as prop to Shelf, and from Shelf as prop to Book
+    moveBook = (book, targetShelf) => {
+        console.log(`The book '${book.title}' will be moved to the '${targetShelf}' shelf.`);
+        // call method from API
+        BooksAPI.update(book, targetShelf)
+            .then((resp) => {
+                // console.log(resp); // the response is given with book keys
+                // pass desired shelf as the new .shelf prop for the book
+                book.shelf = targetShelf;
+                this.setState(state => ({
+                    books: state.books
+                        .filter( newBook => 
+                            // just if new book is not the same as old one
+                            newBook.id !== book.id
+                        )
+                        .concat([book])
+                }));
+            })
+            .catch(error => {
+                console.log(error);
+            })
+    }
+
     render() {
 
         return (
@@ -66,10 +91,10 @@ class Search extends React.Component {
                                     // pass 3 props for:
                                     // - key(otherwise it throws an error)
                                     // - individual book (it'll then have all books data as an object)
-                                    // - moveBook Method (originally in Home and Search)
+                                    // - moveBook Method directly from Search
                                     key={book.id} 
                                     thisBook={book}
-                                    moveBook={this.props.moveBook} 
+                                    moveBook={this.moveBook} 
                                 />
                             ))
                         }
