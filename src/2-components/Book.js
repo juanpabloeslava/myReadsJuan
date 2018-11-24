@@ -15,20 +15,21 @@ class Book extends React.Component {
     }
     
     bookTitle = (book) => {
-        if (book.title) {
-            return book.title;
-        } else {
-            return 'Unkown Title';
-        }   
+        return book.title ? book.title : 'Unkown Title';
     }
 
     bookCover = (book) => {
         const placeholder = "http://via.placeholder.com/128x193?text=No%20Cover";
-        const imageLinks = book.imageLinks;
-        const bookCover = imageLinks ? imageLinks.thumbnail : placeholder;
-        return bookCover  
+        return book.imageLinks ? book.imageLinks.thumbnail : placeholder
     }
 
+    bookShelf = (book) => {
+        return book.shelf ? book.shelf : "none";
+    }
+
+    selectChange = () => {
+        console.log ('This book will change shelves');
+    }
 
     render() {
         return (
@@ -46,7 +47,10 @@ class Book extends React.Component {
                             }>
                         </div>
                         <div className="book-shelf-changer">
-                            <select>
+                            <select 
+                                value={this.bookShelf(this.props.thisBook)}
+                                onChange={this.selectChange}
+                            >
                                 <option value="move" disabled>Move to...</option>
                                 <option value="currentlyReading">Currently Reading</option>
                                 <option value="wantToRead">Want to Read</option>

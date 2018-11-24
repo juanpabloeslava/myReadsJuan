@@ -20,9 +20,6 @@ class Shelf extends React.Component {
                                 />
                             ))
                         }
-                                <li>
-                                    there are {this.props.booksInShelf.length} book in this shelf
-                                </li>
                     </ol>
                 </div>
             </div>
